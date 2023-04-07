@@ -1,0 +1,16 @@
+body{
+   background: #000; 
+}
+.main{
+    width: 100% !important;
+}
+.img{
+    border-radius: 50%;
+}
+.email{
+    padding-left: 40px !important;
+}
+/* tr th ,tr td{
+    padding-left: 4rem !important;
+    padding-right: 4rem !important;
+} */
