@@ -11,7 +11,7 @@ function Modal() {
         modalshow.hoverData &&
         modalshow.hoverData.map((data, index) => (
           <div
-            className="py-3 col-8 d-flex justify-content-center flex-column"
+            className="py-3 col-md-8 col-9 d-flex justify-content-end justify-content-sm-center flex-column"
             key={index}
           >
             <div className="row d-flex justify-content-center flex-column py-5 modal-border border">
@@ -40,7 +40,7 @@ function Modal() {
                   </p>
                 </div>
                 <div className="col">
-                  <button className= {` btn btn-primary ${data.status === "Active" ?"btn-success":"btn-warning"} font-weight-bold py-2 px-5 `} >
+                  <button className= {` btn btn-primary ${data.status === "Active" ?"btn-success":"btn-warning"} font-weight-bold px-2 py-sm-2 px-sm-5 `} >
                     {data.status} User
                   </button>
                 </div>

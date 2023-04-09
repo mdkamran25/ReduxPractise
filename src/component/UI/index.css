@@ -44,3 +44,22 @@ span{
     background-color: rgb(206, 206, 206) !important;
     width: 70% !important;
 }
+.overflow{
+    overflow: scroll;
+    overflow-y: hidden !important;
+}
+.overflow::-webkit-scrollbar-track
+{
+	border-radius: 10px;
+}
+
+.overflow::-webkit-scrollbar
+{
+    height: 7px !important;
+}
+
+.overflow::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-color: rgb(186, 186, 186);
+}
