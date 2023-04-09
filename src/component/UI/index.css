@@ -10,7 +10,37 @@ body{
 .email{
     padding-left: 40px !important;
 }
-/* tr th ,tr td{
-    padding-left: 4rem !important;
-    padding-right: 4rem !important;
-} */
+.active{
+    font-size: 65px;
+}
+sup{
+    top: -0.2em !important;
+}
+.progress, .progress-bar{
+    height: 7px !important;
+    width: 90%;
+}
+.vertical {
+    border-left: 3px solid black;
+    height: 50px;
+    position:absolute;
+    left: 50%;
+}
+p{
+    font-size: 20px !important;
+}
+.modal-border{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 5%;
+}
+.plan-user{
+    font-weight: 500;
+}
+span{
+    overflow: wrap;
+    word-wrap: break-word;
+}
+.select{
+    background-color: rgb(206, 206, 206) !important;
+    width: 70% !important;
+}
