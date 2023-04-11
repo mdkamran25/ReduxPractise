@@ -8,6 +8,8 @@ import deleted from "../Img/delete.png"
 import lock from "../Img/lock.png";
 
 
+
+
 const data = {
   list: [
     {
@@ -65,14 +67,14 @@ const data = {
       icon: deleted
     },
   ],
+  list1:[],
   modalToggle: false,
 };
 const indexReducer = (state = data, action) => {
   switch (action.type) {
     case "showdata":
-      console.log(state.list);
+      console.log(action.payload, "data");
       return [...state];
-
      case "showmodal":
       const newToggle = !state.modalToggle;
       const hoverData = state.list.filter(

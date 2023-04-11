@@ -1,6 +1,8 @@
-export const showData = () =>{
+export const showData = (id) =>{
+    console.log(id, "action")
     return {
-        type: "showdata"
+        type: "showdata",
+        payload:id
     }
 } 
 
