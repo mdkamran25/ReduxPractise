@@ -1,0 +1,17 @@
+input[type=text]{
+    width: 100%;
+    background-color: #faebd8;
+    border: 1px solid #faebd8;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+input[type=text]:focus{
+    outline-color: #d2bb9d;
+}
+.container-fluid{
+    height: 100vh;
+}
+#files{
+    visibility: hidden;
+    display: none;
+}
