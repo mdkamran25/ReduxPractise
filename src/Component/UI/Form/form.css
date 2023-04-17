@@ -1,5 +1,5 @@
-input[type=text]{
-    width: 100%;
+input[type=text], input[type=email], input[type=password]{
+    width: 100% !important;
     background-color: #faebd8;
     border: 1px solid #faebd8;
     border-radius: 5px;
@@ -11,7 +11,10 @@ input[type=text]:focus{
 .container-fluid{
     height: 100vh;
 }
-#files{
+#file{
     visibility: hidden;
     display: none;
+}
+.password{
+    overflow:unset;
 }
