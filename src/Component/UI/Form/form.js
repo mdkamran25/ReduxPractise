@@ -1,15 +1,17 @@
 import React from 'react';
 import './form.css'
 import { useFormik } from 'formik';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { addData } from '../../Slice/signUpSlice';
-  
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 function Form() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    let image = document.getElementById('file');
+    const  [imageValidationError, setimageValidationError]=useState("");
     const initialValues = {
-        file: "",
+        file:"",
         name: "",
         email: "",
         phone:"",
@@ -17,13 +19,38 @@ function Form() {
         confirmPassword: "",
     };
 
+    // const imageValidation = () => {
+    //     console.log("helllo at enter")
+    //         if (image && image.value) {
+    //             if(!/[^\s]+(.*?).(jpg|jpeg|png|svg)$/i.test(image.value)){
+    //                 setimageValidationError("Image must be in the format of jpeg/jpg/png/svg");
+    //                 console.log(imageValidationError)
+    //             }
+    //             else {
+    //                 if(image.files[0].size > 1024*1024){
+    //                     setimageValidationError("Image size must be less than 1mb");
+    //                     console.log(imageValidationError)
+    //                 }
+    //                 else{
+    //                     setimageValidationError("");
+    //                     console.log("added");
+    //                 }
+    //             }
+    //         } else {
+    //             // console.log("else")
+    //             setimageValidationError('Required');
+    //             console.log(imageValidationError)
+    //         }
+    //     } 
     const validate = values => {
         const errors = {};
-        
-        if (!values.file) {
-            errors.file = 'Required';
+
+        //Image Validation 
+        if(!values.file){
+            errors.file = "Required";
         }
 
+        //Name Validation
         if (!values.name) {
           errors.name = 'Required';
         }else if (values.name.length < 4) {
@@ -35,13 +62,15 @@ function Form() {
         else if (values.name.length > 15) {
             errors.name = 'Must be 15 characters or less';
         }
-            
+        
+        //Email Validation
         if (!values.email) {
           errors.email = 'Required';
-        } else if (!/^(?=.{5,40}$)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+        } else if (!/^(?=.{5,50}$)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
           errors.email = 'Invalid email address';
         }
 
+        //Phone Validation
         if (!values.phone) {
             errors.phone = 'Required';
         }
@@ -49,12 +78,14 @@ function Form() {
             errors.phone = 'Invalid Phone Number';
         }
 
+        //Password Validation
         if (!values.password) {
             errors.password = 'Required';
         }else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\*]).{8,15}$/.test(values.password)) {
             errors.password = 'Your Password must contain atleast one digit, one lowercase letter, one uppercase, some Special character(!@#\*) and must be of atleast length eight';
         } 
 
+        //Confirm Password check
         if (!values.confirmPassword) {
             errors.confirmPassword = 'Required';
         }else if (values.confirmPassword !== values.password) {
@@ -66,9 +97,16 @@ function Form() {
     const formik = useFormik({
         initialValues,
         validate,
-        onSubmit: values => {
-            // console.log(values);
+        onSubmit: (values, { resetForm }, ) => {
+            const fr = new FileReader();
+            fr.onload = () => {
+            let url = fr.result;
+            values.file = url;
             dispatch(addData(values));
+            resetForm();
+            };
+            fr.readAsDataURL(image.files[0]);
+            navigate('/home ')
         },
     });
 
@@ -88,12 +126,11 @@ function Form() {
                                     type="file" 
                                     name="file" 
                                     onChange={formik.handleChange}
+                                    // onClick = {()=> {imageValidation()}}
                                     onBlur={formik.handleBlur}
                                     value={formik.values.file}
                                 />
-                            </div>
-                            <div className='col text-center'>
-                                 {formik.touched.file && formik.errors.file ? <div className='d-block'>{formik.errors.file} "by data"</div> : ""}
+                                { formik.errors.file ? <div className='d-block'>{formik.errors.file}</div> :""}
                             </div>
 
                             <div className='col pb-1'>
@@ -164,7 +201,7 @@ function Form() {
                                     disabled={!(formik.dirty && formik.isValid)}
                                 >Submit
                                 </button>
-                                <button type='reset' className='btn btn-danger px-3 py-1'>Reset</button>
+                                <button type='reset' onClick={()=>{formik.resetForm();}} className='btn btn-danger px-3 py-1'>Reset</button>
                             </div>
                         </form>
                     </div>
